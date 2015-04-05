@@ -11,7 +11,7 @@ pub type ptrdiff_t = ::libc::c_long;
 pub type size_t = ::libc::c_ulong;
 pub type wchar_t = ::libc::c_int;
 #[repr(C)]
-#[derive(Copy)]
+#[derive(Copy, Clone)]
 pub struct CXString {
     pub data: *const ::libc::c_void,
     pub private_flags: ::libc::c_uint,
@@ -21,8 +21,7 @@ pub enum Struct_CXTranslationUnitImpl { }
 pub type CXTranslationUnit = *mut Struct_CXTranslationUnitImpl;
 pub type CXClientData = *mut ::libc::c_void;
 #[repr(C)]
-#[derive(Copy)]
-pub struct Struct_CXUnsavedFile {
+#[derive(Copy, Clone)]pub struct Struct_CXUnsavedFile {
     pub Filename: *const ::libc::c_char,
     pub Contents: *const ::libc::c_char,
     pub Length: ::libc::c_ulong,
@@ -33,8 +32,7 @@ pub const CXAvailability_Deprecated: ::libc::c_uint = 1;
 pub const CXAvailability_NotAvailable: ::libc::c_uint = 2;
 pub const CXAvailability_NotAccessible: ::libc::c_uint = 3;
 #[repr(C)]
-#[derive(Copy)]
-pub struct Struct_CXVersion {
+#[derive(Copy, Clone)]pub struct Struct_CXVersion {
     pub Major: ::libc::c_int,
     pub Minor: ::libc::c_int,
     pub Subminor: ::libc::c_int,
@@ -48,19 +46,16 @@ pub const CXGlobalOpt_ThreadBackgroundPriorityForEditing: ::libc::c_uint = 2;
 pub const CXGlobalOpt_ThreadBackgroundPriorityForAll: ::libc::c_uint = 3;
 pub type CXFile = *mut ::libc::c_void;
 #[repr(C)]
-#[derive(Copy)]
-pub struct CXFileUniqueID {
+#[derive(Copy, Clone)]pub struct CXFileUniqueID {
     pub data: [::libc::c_ulonglong; 3],
 }
 #[repr(C)]
-#[derive(Copy)]
-pub struct CXSourceLocation {
+#[derive(Copy, Clone)]pub struct CXSourceLocation {
     pub ptr_data: [*const ::libc::c_void; 2],
     pub int_data: ::libc::c_uint,
 }
 #[repr(C)]
-#[derive(Copy)]
-pub struct CXSourceRange {
+#[derive(Copy, Clone)]pub struct CXSourceRange {
     pub ptr_data: [*const ::libc::c_void; 2],
     pub begin_int_data: ::libc::c_uint,
     pub end_int_data: ::libc::c_uint,
@@ -132,15 +127,13 @@ pub const CXTUResourceUsage_MEMORY_IN_BYTES_END: ::libc::c_uint = 14;
 pub const CXTUResourceUsage_First: ::libc::c_uint = 1;
 pub const CXTUResourceUsage_Last: ::libc::c_uint = 14;
 #[repr(C)]
-#[derive(Copy)]
-pub struct Struct_CXTUResourceUsageEntry {
+#[derive(Copy, Clone)]pub struct Struct_CXTUResourceUsageEntry {
     pub kind: Enum_CXTUResourceUsageKind,
     pub amount: ::libc::c_ulong,
 }
 pub type CXTUResourceUsageEntry = Struct_CXTUResourceUsageEntry;
 #[repr(C)]
-#[derive(Copy)]
-pub struct Struct_CXTUResourceUsage {
+#[derive(Copy, Clone)]pub struct Struct_CXTUResourceUsage {
     pub data: *mut ::libc::c_void,
     pub numEntries: ::libc::c_uint,
     pub entries: *mut CXTUResourceUsageEntry,
@@ -322,8 +315,7 @@ pub struct CXCursor {
     pub data: [*const ::libc::c_void; 3],
 }
 #[repr(C)]
-#[derive(Copy)]
-pub struct CXComment {
+#[derive(Copy, Clone)]pub struct CXComment {
     pub ASTNode: *const ::libc::c_void,
     pub TranslationUnit: CXTranslationUnit,
 }
@@ -334,8 +326,7 @@ pub const CXLinkage_Internal: ::libc::c_uint = 2;
 pub const CXLinkage_UniqueExternal: ::libc::c_uint = 3;
 pub const CXLinkage_External: ::libc::c_uint = 4;
 #[repr(C)]
-#[derive(Copy)]
-pub struct Struct_CXPlatformAvailability {
+#[derive(Copy, Clone)]pub struct Struct_CXPlatformAvailability {
     pub Platform: CXString,
     pub Introduced: CXVersion,
     pub Deprecated: CXVersion,
@@ -418,8 +409,7 @@ pub const CXCallingConv_X86_64SysV: ::libc::c_uint = 11;
 pub const CXCallingConv_Invalid: ::libc::c_uint = 100;
 pub const CXCallingConv_Unexposed: ::libc::c_uint = 200;
 #[repr(C)]
-#[derive(Copy)]
-pub struct CXType {
+#[derive(Copy, Clone)]pub struct CXType {
     pub kind: Enum_CXTypeKind,
     pub data: [*mut ::libc::c_void; 2],
 }
@@ -505,15 +495,13 @@ pub const CXToken_Literal: ::libc::c_uint = 3;
 pub const CXToken_Comment: ::libc::c_uint = 4;
 pub type CXTokenKind = Enum_CXTokenKind;
 #[repr(C)]
-#[derive(Copy)]
-pub struct CXToken {
+#[derive(Copy, Clone)]pub struct CXToken {
     pub int_data: [::libc::c_uint; 4],
     pub ptr_data: *mut ::libc::c_void,
 }
 pub type CXCompletionString = *mut ::libc::c_void;
 #[repr(C)]
-#[derive(Copy)]
-pub struct CXCompletionResult {
+#[derive(Copy, Clone)]pub struct CXCompletionResult {
     pub CursorKind: Enum_CXCursorKind,
     pub CompletionString: CXCompletionString,
 }
@@ -540,8 +528,7 @@ pub const CXCompletionChunk_Equal: ::libc::c_uint = 18;
 pub const CXCompletionChunk_HorizontalSpace: ::libc::c_uint = 19;
 pub const CXCompletionChunk_VerticalSpace: ::libc::c_uint = 20;
 #[repr(C)]
-#[derive(Copy)]
-pub struct CXCodeCompleteResults {
+#[derive(Copy, Clone)]pub struct CXCodeCompleteResults {
     pub Results: *mut CXCompletionResult,
     pub NumResults: ::libc::c_uint,
 }
@@ -583,7 +570,6 @@ pub type Enum_CXVisitorResult = ::libc::c_uint;
 pub const CXVisit_Break: ::libc::c_uint = 0;
 pub const CXVisit_Continue: ::libc::c_uint = 1;
 #[repr(C)]
-#[derive(Copy)]
 pub struct CXCursorAndRangeVisitor {
     pub context: *mut ::libc::c_void,
     pub visit: ::std::option::Option<extern "C" fn
@@ -600,14 +586,12 @@ pub type CXIdxClientEntity = *mut ::libc::c_void;
 pub type CXIdxClientContainer = *mut ::libc::c_void;
 pub type CXIdxClientASTFile = *mut ::libc::c_void;
 #[repr(C)]
-#[derive(Copy)]
-pub struct CXIdxLoc {
+#[derive(Copy, Clone)]pub struct CXIdxLoc {
     pub ptr_data: [*mut ::libc::c_void; 2],
     pub int_data: ::libc::c_uint,
 }
 #[repr(C)]
-#[derive(Copy)]
-pub struct CXIdxIncludedFileInfo {
+#[derive(Copy, Clone)]pub struct CXIdxIncludedFileInfo {
     pub hashLoc: CXIdxLoc,
     pub filename: *const ::libc::c_char,
     pub file: CXFile,
@@ -616,8 +600,7 @@ pub struct CXIdxIncludedFileInfo {
     pub isModuleImport: ::libc::c_int,
 }
 #[repr(C)]
-#[derive(Copy)]
-pub struct CXIdxImportedASTFileInfo {
+#[derive(Copy, Clone)]pub struct CXIdxImportedASTFileInfo {
     pub file: CXFile,
     pub module: CXModule,
     pub loc: CXIdxLoc,
@@ -667,15 +650,13 @@ pub const CXIdxAttr_IBAction: ::libc::c_uint = 1;
 pub const CXIdxAttr_IBOutlet: ::libc::c_uint = 2;
 pub const CXIdxAttr_IBOutletCollection: ::libc::c_uint = 3;
 #[repr(C)]
-#[derive(Copy)]
-pub struct CXIdxAttrInfo {
+#[derive(Copy, Clone)]pub struct CXIdxAttrInfo {
     pub kind: CXIdxAttrKind,
     pub cursor: CXCursor,
     pub loc: CXIdxLoc,
 }
 #[repr(C)]
-#[derive(Copy)]
-pub struct CXIdxEntityInfo {
+#[derive(Copy, Clone)]pub struct CXIdxEntityInfo {
     pub kind: CXIdxEntityKind,
     pub templateKind: CXIdxEntityCXXTemplateKind,
     pub lang: CXIdxEntityLanguage,
@@ -686,13 +667,11 @@ pub struct CXIdxEntityInfo {
     pub numAttributes: ::libc::c_uint,
 }
 #[repr(C)]
-#[derive(Copy)]
-pub struct CXIdxContainerInfo {
+#[derive(Copy, Clone)]pub struct CXIdxContainerInfo {
     pub cursor: CXCursor,
 }
 #[repr(C)]
-#[derive(Copy)]
-pub struct CXIdxIBOutletCollectionAttrInfo {
+#[derive(Copy, Clone)]pub struct CXIdxIBOutletCollectionAttrInfo {
     pub attrInfo: *const CXIdxAttrInfo,
     pub objcClass: *const CXIdxEntityInfo,
     pub classCursor: CXCursor,
@@ -701,8 +680,7 @@ pub struct CXIdxIBOutletCollectionAttrInfo {
 pub type CXIdxDeclInfoFlags = ::libc::c_uint;
 pub const CXIdxDeclFlag_Skipped: ::libc::c_uint = 1;
 #[repr(C)]
-#[derive(Copy)]
-pub struct CXIdxDeclInfo {
+#[derive(Copy, Clone)]pub struct CXIdxDeclInfo {
     pub entityInfo: *const CXIdxEntityInfo,
     pub cursor: CXCursor,
     pub loc: CXIdxLoc,
@@ -722,41 +700,35 @@ pub const CXIdxObjCContainer_ForwardRef: ::libc::c_uint = 0;
 pub const CXIdxObjCContainer_Interface: ::libc::c_uint = 1;
 pub const CXIdxObjCContainer_Implementation: ::libc::c_uint = 2;
 #[repr(C)]
-#[derive(Copy)]
-pub struct CXIdxObjCContainerDeclInfo {
+#[derive(Copy, Clone)]pub struct CXIdxObjCContainerDeclInfo {
     pub declInfo: *const CXIdxDeclInfo,
     pub kind: CXIdxObjCContainerKind,
 }
 #[repr(C)]
-#[derive(Copy)]
-pub struct CXIdxBaseClassInfo {
+#[derive(Copy, Clone)]pub struct CXIdxBaseClassInfo {
     pub base: *const CXIdxEntityInfo,
     pub cursor: CXCursor,
     pub loc: CXIdxLoc,
 }
 #[repr(C)]
-#[derive(Copy)]
-pub struct CXIdxObjCProtocolRefInfo {
+#[derive(Copy, Clone)]pub struct CXIdxObjCProtocolRefInfo {
     pub protocol: *const CXIdxEntityInfo,
     pub cursor: CXCursor,
     pub loc: CXIdxLoc,
 }
 #[repr(C)]
-#[derive(Copy)]
-pub struct CXIdxObjCProtocolRefListInfo {
+#[derive(Copy, Clone)]pub struct CXIdxObjCProtocolRefListInfo {
     pub protocols: *const *const CXIdxObjCProtocolRefInfo,
     pub numProtocols: ::libc::c_uint,
 }
 #[repr(C)]
-#[derive(Copy)]
-pub struct CXIdxObjCInterfaceDeclInfo {
+#[derive(Copy, Clone)]pub struct CXIdxObjCInterfaceDeclInfo {
     pub containerInfo: *const CXIdxObjCContainerDeclInfo,
     pub superInfo: *const CXIdxBaseClassInfo,
     pub protocols: *const CXIdxObjCProtocolRefListInfo,
 }
 #[repr(C)]
-#[derive(Copy)]
-pub struct CXIdxObjCCategoryDeclInfo {
+#[derive(Copy, Clone)]pub struct CXIdxObjCCategoryDeclInfo {
     pub containerInfo: *const CXIdxObjCContainerDeclInfo,
     pub objcClass: *const CXIdxEntityInfo,
     pub classCursor: CXCursor,
@@ -764,15 +736,13 @@ pub struct CXIdxObjCCategoryDeclInfo {
     pub protocols: *const CXIdxObjCProtocolRefListInfo,
 }
 #[repr(C)]
-#[derive(Copy)]
-pub struct CXIdxObjCPropertyDeclInfo {
+#[derive(Copy, Clone)]pub struct CXIdxObjCPropertyDeclInfo {
     pub declInfo: *const CXIdxDeclInfo,
     pub getter: *const CXIdxEntityInfo,
     pub setter: *const CXIdxEntityInfo,
 }
 #[repr(C)]
-#[derive(Copy)]
-pub struct CXIdxCXXClassDeclInfo {
+#[derive(Copy, Clone)]pub struct CXIdxCXXClassDeclInfo {
     pub declInfo: *const CXIdxDeclInfo,
     pub bases: *const *const CXIdxBaseClassInfo,
     pub numBases: ::libc::c_uint,
@@ -781,8 +751,7 @@ pub type CXIdxEntityRefKind = ::libc::c_uint;
 pub const CXIdxEntityRef_Direct: ::libc::c_uint = 1;
 pub const CXIdxEntityRef_Implicit: ::libc::c_uint = 2;
 #[repr(C)]
-#[derive(Copy)]
-pub struct CXIdxEntityRefInfo {
+#[derive(Copy, Clone)]pub struct CXIdxEntityRefInfo {
     pub kind: CXIdxEntityRefKind,
     pub cursor: CXCursor,
     pub loc: CXIdxLoc,
@@ -791,7 +760,6 @@ pub struct CXIdxEntityRefInfo {
     pub container: *const CXIdxContainerInfo,
 }
 #[repr(C)]
-#[derive(Copy)]
 pub struct IndexerCallbacks {
     pub abortQuery: ::std::option::Option<extern "C" fn
                                               (arg1: CXClientData,
